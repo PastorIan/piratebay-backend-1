@@ -20,8 +20,8 @@ public class DepartmentDao {
 
     public List<DepartamentModel> findAllCities() {
 
-        String query = "SELECT deparment_id, name_departament\n" +
-                "\tFROM public.departament ";
+        String query = "SELECT warehouse_id, warehouse_name " +
+                "\tFROM warehouse ";
         List<DepartamentModel> result = null;
         try {
             result = jdbcTemplate.query(query, new RowMapper<DepartamentModel>() {

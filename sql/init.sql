@@ -23,7 +23,7 @@ INSERT INTO feature (feature_code, feature_name, status, tx_id, tx_username, tx_
 VALUES ('PAGE_USER_MANAGEMENT', 'Gestión de usuarios', 1, 1, 'admin', 'localhost', now());
 
 INSERT INTO feature (feature_code, feature_name, status, tx_id, tx_username, tx_host, tx_date)
-VALUES ('PAGE_PRODUCT_MANAGEMENT', 'Gestión de productos', 1, 1, 'admin', 'localhost', now());
+VALUES ('PAGE_WAREHOUSE', 'Gestión de almacenes', 1, 1, 'admin', 'localhost', now());
 
 INSERT INTO feature (feature_code, feature_name, status, tx_id, tx_username, tx_host, tx_date)
 VALUES ('BUTTON_DELETE_USER', 'Botón para eliminar un usuario', 1, 1, 'admin', 'localhost', now());
