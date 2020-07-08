@@ -1,10 +1,9 @@
 package bo.edu.ucb.sis.piratebay.controller;
 
-
 import bo.edu.ucb.sis.piratebay.bl.KardexBl;
-import bo.edu.ucb.sis.piratebay.bl.WarehouseBl;
+import bo.edu.ucb.sis.piratebay.bl.PepsBl;
 import bo.edu.ucb.sis.piratebay.model.KardexModel;
-import bo.edu.ucb.sis.piratebay.model.WarehouseModel;
+import bo.edu.ucb.sis.piratebay.model.PepsModel;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -21,23 +20,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/kardex")
+@RequestMapping("/api/v1/peps")
 @CrossOrigin(origins = "*")
-public class KardexController {
+public class PepsController {
 
-    private KardexBl kardexBl;
+    private PepsBl pepsBl;
 
     @Value("${piratebay.security.secretJwt}")
     private String secretJwt;
 
     @Autowired
-    public KardexController(KardexBl kardexBl) {
-        this.kardexBl= kardexBl;
+    public PepsController(PepsBl pepsBl) {
+        this.pepsBl= pepsBl;
     }
 
     @RequestMapping(method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<KardexModel>> findAllKardex(@RequestHeader("Authorization") String authorization, @RequestBody String json) throws JSONException { // bearer asdasdasdasd
+    public ResponseEntity<List<PepsModel>> findAllAttributes(@RequestHeader("Authorization") String authorization, @RequestBody String json) throws JSONException { // bearer asdasdasdasd
 
         // Lo unico que estamos haciendo es decodificar el token.
         String tokenJwT = authorization.substring(7);
@@ -59,6 +58,6 @@ public class KardexController {
                 .build();
         verifier.verify(tokenJwT);
 
-        return new ResponseEntity<>( this.kardexBl.findAllKardex(order), HttpStatus.OK);
+        return new ResponseEntity<>( this.pepsBl.findAllAttributes(order), HttpStatus.OK);
     }
 }
