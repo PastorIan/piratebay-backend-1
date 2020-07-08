@@ -19,7 +19,7 @@ public class WarehouseDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<WarehouseModel> findAllMovies() {
+    public List<WarehouseModel> findAllMovies(String nombre) {
 
         String query = "SELECT a.product_code , a.product_name, b.data_type, c.date, d.provider_name, e.qtty_commit\n" +
                 "\tFROM product a, attribute b, public.\"order\" c, provider d, product_order e, warehouse f" +
@@ -27,7 +27,8 @@ public class WarehouseDao {
                 "\tAND a.product_id = e.product_id " +
                 "\tAND c.order_id = e.order_id " +
                 "\tAND  d.provider_id = c.provider_id " +
-                "\tAND f.warehouse_id = c.warehouse_id";
+                "\tAND f.warehouse_id = c.warehouse_id " +
+                "\tAND warehouse_name = '"+nombre+"'";
         List<WarehouseModel> result = null;
         try {
             result = jdbcTemplate.query(query, new RowMapper<WarehouseModel>() {

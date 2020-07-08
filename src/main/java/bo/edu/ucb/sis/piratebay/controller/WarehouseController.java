@@ -15,6 +15,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.util.List;
 
 @RestController
@@ -31,9 +33,9 @@ public class WarehouseController {
         this.warehouseBl= warehouseBl;
     }
 
-    @RequestMapping(method = RequestMethod.GET,
+    @RequestMapping(method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<WarehouseModel>> findAllProducts(@RequestHeader("Authorization") String authorization) { // bearer asdasdasdasd
+    public ResponseEntity<List<WarehouseModel>> findAllMovies(@RequestHeader("Authorization") String authorization,@RequestBody String json) throws JSONException { // bearer asdasdasdasd
 
         // Lo unico que estamos haciendo es decodificar el token.
         String tokenJwT = authorization.substring(7);
@@ -41,7 +43,9 @@ public class WarehouseController {
         DecodedJWT decodedJWT = JWT.decode(tokenJwT);
         String idUsuario = decodedJWT.getSubject();
         System.out.println("USUARIO: " + idUsuario);
-
+        JSONObject jsonObject = new JSONObject(json);
+        String order = jsonObject.getString("orderName");
+        System.out.println("ORDER_NAME: " + order);
         if(!"AUTHN".equals(decodedJWT.getClaim("type").asString()) ) {
             throw new RuntimeException("El token proporcionado no es un token de Autenthication");
         }
@@ -53,6 +57,6 @@ public class WarehouseController {
                 .build();
         verifier.verify(tokenJwT);
 
-        return new ResponseEntity<>( this.warehouseBl.findAllMovies(), HttpStatus.OK);
+        return new ResponseEntity<>( this.warehouseBl.findAllMovies(order), HttpStatus.OK);
     }
 }

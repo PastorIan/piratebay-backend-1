@@ -18,14 +18,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/ciudades")
 @CrossOrigin(origins = "*")
-public class DepartmentContoller {
+public class DepartmentController {
     private DepartmentBl departmentBl;
 
     @Value("${piratebay.security.secretJwt}")
     private String secretJwt;
 
     @Autowired
-    public DepartmentContoller(DepartmentBl departmentBl) {
+    public DepartmentController(DepartmentBl departmentBl) {
         this.departmentBl = departmentBl;
     }
 

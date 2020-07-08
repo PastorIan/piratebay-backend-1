@@ -16,7 +16,7 @@ public class WarehouseBl {
         this.warehouseDao = warehouseDao;
     }
 
-    public List<WarehouseModel> findAllMovies() {
-        return this.warehouseDao.findAllMovies();
+    public List<WarehouseModel> findAllMovies(String nombre) {
+        return this.warehouseDao.findAllMovies(nombre);
     }
 }
